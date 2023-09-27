@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
 
+## Before getting started
+
+install all dependencies by running `npm install`, if there's bug try to install all dependencies alone : `npm install bootstrap`, `npm install jquery`, `npm install popper`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
