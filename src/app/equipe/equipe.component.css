@@ -1,0 +1,21 @@
+.full-page {
+  height: 89vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../assets/ss16801_02.webp'); /* Replace with the path to your wallpaper */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow: hidden;
+  color: white;
+}
+
+.card-width{
+  width: 20%;
+}
+
+.full-width{
+ width: 100%;
+}
