@@ -1,0 +1,30 @@
+.full-page {
+  height: 89vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../assets/index-background.jpg'); /* Replace with the path to your wallpaper */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow: hidden;
+}
+
+/* Optional: Remove default container width for full width */
+.container.full-page {
+  width: 100%;
+  max-width: 100%;
+}
+
+.text-white{
+  color: white;
+}
+.top-margin{
+  margin-top: 10px;
+}
+
+.button{
+  background-color: #6da49d;
+  border-color: black;
+}

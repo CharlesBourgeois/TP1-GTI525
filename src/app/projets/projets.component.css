@@ -1,0 +1,31 @@
+.full-page {
+  height: 89vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../assets/lofi-nightlife-city-thumb.jpg'); /* Replace with the path to your wallpaper */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow: hidden;
+  color: white;
+}
+
+.margin-left{
+  margin-left: 10%;
+}
+.margin-right{
+  margin-right: 10%;
+}
+
+.text{
+  font-size: 20px;
+}
+
+
+.image{
+  border-radius: 20px;
+  height: 40vh;
+  margin-bottom: 20px;
+}
