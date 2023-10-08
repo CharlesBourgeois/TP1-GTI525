@@ -8,6 +8,9 @@ import { FooterComponent } from './footer/footer.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { ProjetsComponent } from './projets/projets.component';
 import { EquipeComponent } from './equipe/equipe.component';
+import { ItinerairesComponent } from './itineraires/itineraires.component';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
+import { InteretComponent } from './interet/interet.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { EquipeComponent } from './equipe/equipe.component';
     FooterComponent,
     AccueilComponent,
     ProjetsComponent,
-    EquipeComponent
+    EquipeComponent,
+    ItinerairesComponent,
+    StatistiquesComponent,
+    InteretComponent
   ],
   imports: [
     BrowserModule,

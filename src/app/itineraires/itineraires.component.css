@@ -1,0 +1,51 @@
+.outer-wrapper {
+  width: 100vw;
+  height: 89vh;
+  background: url('../../assets/lofi-nightlife-city-thumb.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  width: 80%;  /* Adjust width as needed */
+  height: 80%;  /* Adjust height as needed */
+  border-radius: 8px;  /* Optional: Rounds the corners of the container */
+}
+
+.left-section {
+  background-color: white;
+  flex: 0 0 25%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.right-section {
+  flex: 1;
+  background-color: #e5e5e5;  /* Placeholder background color for visualization */
+}
+
+.top-margin{
+  margin-top: 10px;
+}
+
+.flex{
+  display: flex;
+  text-align: center;
+}
+.right-margin{
+  margin-right: 20px;
+}
+.input-width{
+  width: 100%;
+}
+
+.p-width{
+  width: 10px;
+}
+.bottom-margin{
+  margin-bottom: 20px;
+}

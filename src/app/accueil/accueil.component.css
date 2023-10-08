@@ -20,11 +20,16 @@
 .text-white{
   color: white;
 }
-.top-margin{
-  margin-top: 10px;
+.left-margin{
+  margin-left: 10px;
 }
 
 .button{
   background-color: #6da49d;
   border-color: black;
+}
+
+.flex{
+  display: flex;
+  flex-direction: row;
 }
