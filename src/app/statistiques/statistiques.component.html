@@ -7,12 +7,39 @@
       <input type="date" class="input-width" />
       <h6 class="top-margin"> Recherche de compteur</h6>
       <div class="flex">
-        <input type="text" class="input-width" />
+        <input type="text" class="input-width" [(ngModel)]="searchTerm" (keyup)="filterRecords()" />
         <button class="left-margin button-width"></button>
       </div>
     </div>
     <div class="right-section">
       <!-- Your map goes here -->
+      <table>
+        <thead>
+          <tr>
+            <th (click)="sortRecords('ID')">Identifiant
+              <span *ngIf="currentSortField === 'ID'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+            <th (click)="sortRecords('Nom')">Nom
+              <span *ngIf="currentSortField === 'Nom'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+            <th (click)="sortRecords('Statut')">Statut
+              <span *ngIf="currentSortField === 'Statut'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+            <th (click)="sortRecords('Annee_implante')">Année d'implantation
+              <span *ngIf="currentSortField === 'Annee_implante'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of filteredRecords | paginate: { itemsPerPage: 15, currentPage: currentPage }">
+            <td>{{ record.ID }}</td>
+            <td>{{ record.Nom }}</td>
+            <td>{{ record.Statut }}</td>
+            <td>{{ record.Annee_implante }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
     </div>
   </div>
 </div>

@@ -1,3 +1,8 @@
+/* Styles généraux */
+body, html {
+  font-family: 'Arial', sans-serif;
+}
+
 .outer-wrapper {
   width: 100vw;
   height: 89vh;
@@ -10,42 +15,68 @@
 
 .container {
   display: flex;
-  width: 80%;  /* Adjust width as needed */
-  height: 80%;  /* Adjust height as needed */
-  border-radius: 8px;  /* Optional: Rounds the corners of the container */
+  width: 80%;
+  height: 80%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.left-section, .right-section {
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border-radius: 4px;
 }
 
 .left-section {
   background-color: white;
   flex: 0 0 25%;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
+  margin-right: 10px; /* Espacement entre les sections */
 }
 
 .right-section {
   flex: 1;
-  background-color: #e5e5e5;  /* Placeholder background color for visualization */
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.top-margin{
+.top-margin {
+  margin-top: 20px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
   margin-top: 10px;
 }
 
-.flex{
-  display: flex;
-  text-align: center;
-}
-.right-margin{
-  margin-right: 20px;
-}
-.input-width{
-  width: 100%;
+.input-width {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.p-width{
+.right-margin {
+  margin-right: 20px;
+}
+
+/* Pour les éléments avec une largeur définie */
+.p-width {
   width: 10px;
 }
-.bottom-margin{
+
+.bottom-margin {
   margin-bottom: 20px;
+}
+
+/* Envisagez d'ajouter des transitions ou d'autres effets pour rendre l'interface utilisateur plus fluide. Par exemple: */
+.input-width, button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #ddd; /* Changez ceci en fonction de vos préférences */
 }
