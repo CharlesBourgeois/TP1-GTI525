@@ -32,7 +32,7 @@ body, html {
 .left-section {
   background-color: white;
   flex: 0 0 25%;
-  margin-right: 10px; /* Espacement entre les sections */
+  margin-right: 10px;
 }
 
 .right-section {
@@ -64,7 +64,6 @@ body, html {
   margin-right: 20px;
 }
 
-/* Pour les éléments avec une largeur définie */
 .p-width {
   width: 10px;
 }
@@ -73,11 +72,10 @@ body, html {
   margin-bottom: 20px;
 }
 
-/* Envisagez d'ajouter des transitions ou d'autres effets pour rendre l'interface utilisateur plus fluide. Par exemple: */
 .input-width, button {
   transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #ddd; /* Changez ceci en fonction de vos préférences */
+  background-color: #ddd;
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CsvService } from '../csv.service'; // Ajustez le chemin
+import { CsvService } from '../csv.service';
 
 @Component({
   selector: 'app-interet',
@@ -8,7 +8,7 @@ import { CsvService } from '../csv.service'; // Ajustez le chemin
 })
 export class InteretComponent {
   public records: any[] = [];
-  public currentPage: number = 1;  // Ajouté pour la pagination
+  public currentPage: number = 1;
 
   constructor(private csvService: CsvService) { }
 

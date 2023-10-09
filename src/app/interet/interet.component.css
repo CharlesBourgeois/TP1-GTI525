@@ -32,7 +32,7 @@ body, html {
 .left-section {
   background-color: white;
   flex: 0 0 25%;
-  margin-right: 10px; /* Espacement entre les sections */
+  margin-right: 10px;
 }
 
 .right-section {
@@ -54,16 +54,16 @@ h3, h6 {
 
 .img {
   width: 100%;
-  border-radius: 4px; /* Arrondit les coins de l'image */
-  margin-bottom: 20px; /* Espacement après l'image */
+  border-radius: 4px;
+  margin-bottom: 20px;
 }
 
 .opt-width {
-  width: 100%; /* La largeur du sélecteur */
+  width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 20px; /* Espacement après chaque sélecteur */
+  margin-bottom: 20px;
 }
 
 table {
@@ -115,12 +115,12 @@ tr:hover {
 }
 
 th {
-  cursor: pointer;  /* Indique que les en-têtes sont cliquables */
-  position: relative;  /* Pour positionner l'indicateur */
+  cursor: pointer;
+  position: relative;
 }
 
 th span {
   position: absolute;
-  right: 8px;  /* Positionner l'indicateur sur le côté droit de l'en-tête */
-  font-size: 0.8em;  /* Réduire légèrement la taille des indicateurs */
+  right: 8px;
+  font-size: 0.8em;
 }

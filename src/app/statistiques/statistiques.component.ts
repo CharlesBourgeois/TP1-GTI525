@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CsvService } from '../csv.service'; // Ajustez le chemin
+import { CsvService } from '../csv.service';
 
 @Component({
   selector: 'app-statistiques',
@@ -8,10 +8,10 @@ import { CsvService } from '../csv.service'; // Ajustez le chemin
 })
 export class StatistiquesComponent implements OnInit {
   public records: any[] = [];
-  public currentPage: number = 1;  // Ajouté pour la pagination
-  currentSortField: string = 'ID';  // Par défaut, triez par ID
+  public currentPage: number = 1;
+  currentSortField: string = 'ID';
   sortDirection: 'asc' | 'desc' = 'asc';
-  searchTerm: string = '';  // Pour suivre la valeur de recherche
+  searchTerm: string = '';
   filteredRecords: any[] = [];
 
   constructor(private csvService: CsvService) { }
@@ -20,7 +20,7 @@ export class StatistiquesComponent implements OnInit {
     this.csvService.loadData('assets/compteurs.csv')
       .then(data => {
         this.records = data;
-        this.filteredRecords = [...this.records];  // Clone le tableau après que les données soient chargées
+        this.filteredRecords = [...this.records];
       });
   }
 
@@ -33,7 +33,7 @@ export class StatistiquesComponent implements OnInit {
     } else {
       this.filteredRecords = this.records;
     }
-    this.currentPage = 1;  // Réinitialisez la pagination
+    this.currentPage = 1;
   }
 
   sortRecords(sortField: string) {
