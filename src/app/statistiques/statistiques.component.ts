@@ -44,7 +44,7 @@ export class StatistiquesComponent implements OnInit {
       this.sortDirection = 'asc';
     }
 
-    this.records.sort((a, b) => {
+    this.filteredRecords.sort((a, b) => {
       if (a[this.currentSortField] < b[this.currentSortField]) {
         return this.sortDirection === 'asc' ? -1 : 1;
       }
