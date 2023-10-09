@@ -10,13 +10,14 @@ body, html {
   background-size: cover;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .container {
+  margin-top: 40px;
   display: flex;
-  width: 80%;
-  height: 80%;
+  width: 90%;
+  height: 90%;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -42,49 +43,84 @@ body, html {
   justify-content: space-between;
 }
 
+h3, h6 {
+  margin-bottom: 16px;
+  color: #333;
+}
+
 .top-margin {
   margin-top: 20px;
 }
 
-.flex {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+.img {
+  width: 100%;
+  border-radius: 4px; /* Arrondit les coins de l'image */
+  margin-bottom: 20px; /* Espacement après l'image */
 }
 
-.input-width {
-  flex: 1;
-  padding: 10px;
+.opt-width {
+  width: 100%; /* La largeur du sélecteur */
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-bottom: 20px; /* Espacement après chaque sélecteur */
 }
 
-.right-margin {
-  margin-right: 20px;
-}
-
-/* Pour les éléments avec une largeur définie */
-.p-width {
-  width: 10px;
-}
-
-.bottom-margin {
-  margin-bottom: 20px;
-}
-
-/* Envisagez d'ajouter des transitions ou d'autres effets pour rendre l'interface utilisateur plus fluide. Par exemple: */
-.input-width, button {
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background-color: #ddd; /* Changez ceci en fonction de vos préférences */
-}
-
-.img{
+table {
   width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.opt-width{
-  width: 80%;
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination li {
+  list-style: none;
+  margin: 0 5px;
+}
+
+.pagination a {
+  padding: 8px 12px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+}
+
+.pagination a.current, .pagination a:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+th {
+  cursor: pointer;  /* Indique que les en-têtes sont cliquables */
+  position: relative;  /* Pour positionner l'indicateur */
+}
+
+th span {
+  position: absolute;
+  right: 8px;  /* Positionner l'indicateur sur le côté droit de l'en-tête */
+  font-size: 0.8em;  /* Réduire légèrement la taille des indicateurs */
 }

@@ -1,4 +1,4 @@
-ID,Arrondissement,Nom_parc_lieu,Proximité_jeux_repère,Intersection,Etat,Date_installation,Remarque,Precision_localisation,X,Y,Longitude,Latitude
+ID,Arrondissement,Nom_parc_lieu,Proximite_jeux_repere,Intersection,Etat,Date_installation,Remarque,Precision_localisation,X,Y,Longitude,Latitude
 1,Saint-Léonard,Delorme,Bocce,rue Loranger/rue Péguy,,,,orthophotographies,297819.89,5050237.94,-73.5894623756030,45.5920117541965
 2,Saint-Léonard,Delorme,Pavillon,rue Loranger/rue Péguy,,,,orthophotographies,297773.67,5050257.68,-73.5900550494669,45.5921889147626
 3,Saint-Léonard,Delorme,Pavillon,rue Loranger/rue Péguy,,,,orthophotographies,297774.77,5050256.8,-73.5900409383450,45.5921810073908

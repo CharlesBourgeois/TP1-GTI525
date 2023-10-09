@@ -9,8 +9,8 @@ export class CsvService {
 
   constructor(private http: HttpClient) { }
 
-  public loadData(): Promise<any[]> {
-    return this.http.get('assets/compteurs.csv', { responseType: 'text' }).toPromise()
+  public loadData(filePath: string = 'assets/compteurs.csv'): Promise<any[]> {
+    return this.http.get(filePath, { responseType: 'text' }).toPromise()
       .then(data => {
         let parsedData: any[] = [];
         if (data) {

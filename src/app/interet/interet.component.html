@@ -18,12 +18,30 @@
       <h6 class="top-margin"> Type de lieu</h6>
       <select class="opt-width">
         <option>Fontaine à boire</option>
-        <option >Atelier de réparation de vélo</option>
+        <option>Atelier de réparation de vélo</option>
       </select>
 
     </div>
     <div class="right-section">
-
+      <table>
+        <thead>
+          <tr>
+            <th>Arrondissement</th>
+            <th>Type</th>
+            <th>Nom du lieu</th>
+            <th>Adresse</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of records | paginate: { itemsPerPage: 20, currentPage: currentPage }">
+            <td>{{ record.Arrondissement }}</td>
+            <td>{{ record.Proximite_jeux_repere }}</td>
+            <td>{{ record.Nom_parc_lieu }}</td>
+            <td>{{ record.Intersection }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
     </div>
   </div>
 </div>

@@ -17,7 +17,7 @@ export class StatistiquesComponent implements OnInit {
   constructor(private csvService: CsvService) { }
 
   ngOnInit() {
-    this.csvService.loadData()
+    this.csvService.loadData('assets/compteurs.csv')
       .then(data => {
         this.records = data;
         this.filteredRecords = [...this.records];  // Clone le tableau après que les données soient chargées
