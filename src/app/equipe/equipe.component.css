@@ -19,3 +19,17 @@
 .full-width{
  width: 100%;
 }
+
+.card-img-top {
+  height: 350px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card {
+  height: 100%;
+}
+
+.card-body {
+  text-align: center;
+}
