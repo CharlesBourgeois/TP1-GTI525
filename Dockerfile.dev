@@ -1,0 +1,21 @@
+# Use the same node base image
+FROM node:19
+
+# Set the working directory
+WORKDIR /app
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Copy package.json and package-lock.json
+COPY package.json package-lock.json ./
+
+# Install node modules
+RUN npm install
+
+# Expose the port the app runs on
+EXPOSE 4200
+EXPOSE 49153
+
+# Start the app using the Angular CLI
+CMD ["ng", "serve", "--host", "0.0.0.0", "--poll", "1"]

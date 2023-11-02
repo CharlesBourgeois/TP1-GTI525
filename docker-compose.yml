@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  tp1-gti525-app:
+    container_name: tp1-gti525-app
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4200:4200"  # Angular serves on port 4200 by default
+      - "49153:49153"  # Port for live-reload server
+    volumes:
+      - .:/app  # Mount the project directory to the container's /app directory
+      - /app/node_modules  # Use node_modules from the container
+    depends_on:
+      - mongodb
+    command: npm start  # Override the default command to use npm start
+
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
