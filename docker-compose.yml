@@ -15,6 +15,15 @@ services:
       - mongodb
     command: npm start  # Override the default command to use npm start
 
+  express-server:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Assuming you have a Dockerfile in the server directory
+    ports:
+      - "3000:3000"  # Express server port
+    depends_on:
+      - mongodb
+
   mongodb:
     container_name: mongodb
     image: mongo
