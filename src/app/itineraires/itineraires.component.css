@@ -203,3 +203,33 @@ button:hover {
   border-radius: 5px;
 }
 
+/* button group css */
+.button-group {
+  display: inline-flex;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: #BDD4FB;
+  color: white;
+  outline: none;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #ADC6FB;
+}
+
+.button.active {
+  background-color: #7BA4FC;
+}
+
+/* Optional: Add some custom styling for when a button is focused or active */
+.button:focus, .button:active {
+  background-color: #6B8EFC;
+}

@@ -4,22 +4,26 @@
       <h3>Piste et voies cyclables</h3>
       <p>La ville de montréal offre de multiple piste cyclables à découvrir !</p>
       <h6> Réseaux</h6>
-      <select>
-        <option>Saisonnier</option>
-        <option>4 saisons</option>
-      </select>
-      <div class="top-margin">
-        <h6> Types de voie</h6>
-        <div>
-          <input type="checkbox" id="checkbox1">
-          <label for="checkbox1">Voies protégées</label>
-        </div>
-        <div>
-          <input type="checkbox" id="checkbox2">
-          <label for="checkbox2">Voies partagées</label>
 
+      <div class="button-group">
+        <button id="saisonnier-btn" class="button" [class.active]="activeSeason === 'Saisonnier'" (click)="setActiveSeason('Saisonnier')">Saisonnier</button>
+        <button id="quatre-saisons-btn" class="button" [class.active]="activeSeason === '4 saisons'" (click)="setActiveSeason('4 saisons')">4 saisons</button>
+      </div>
+
+      <div class="top-margin">
+        <h6>Types de voie</h6>
+        <!-- Checkbox pour les voies protégées basées sur le Tableau 3 -->
+        <div>
+          <input type="checkbox" id="protected-path" name="path-type" (change)="handleProtectedPathChange($event)">
+          <label for="protected-path">Voies protégées</label>
+        </div>
+        <!-- Checkbox pour les voies partagées basées sur le Tableau 3 -->
+        <div>
+          <input type="checkbox" id="shared-path" name="path-type" (change)="handleSharedPathChange($event)">
+          <label for="shared-path">Voies partagées</label>
         </div>
       </div>
+
       <h6 class="top-margin"> Les plus populaires par période</h6>
       <div class="flex">
         <p class="right-margin p-width">De:</p>
@@ -30,6 +34,7 @@
         <input type="date" class="input-width" />
       </div>
     </div>
+    
     <!-- right-section -->
     <div class="right-section">
       <div class="info-icon" (click)="openModal()">i</div>
@@ -41,10 +46,18 @@
 
           <!-- Legend Items -->
           <ul class="legend-list">
-            <li><span class="legend-icon rev-icon"></span> Le REV</li>
-            <li><span class="legend-icon shared-path-icon"></span> Voie partagée</li>
-            <li><span class="legend-icon protected-path-icon"></span> Voie protégée</li>
-            <li><span class="legend-icon multipurpose-trail-icon"></span> Sentier polyvalent</li>
+            <li><span class="legend-icon rev-icon"></span> Le REV
+              <p>Ensemble de pistes cyclables protégées qui relie divers points d'intérêt sur l'île de Montréal.</p>
+            </li>
+            <li><span class="legend-icon shared-path-icon"></span> Voie partagée
+              <p>Des pistes cyclables délimitées ou des rues partagées par les cyclistes et les automobilistes.</p>
+            </li>
+            <li><span class="legend-icon protected-path-icon"></span> Voie protégée
+              <p>Une voie distincte, séparée par un élément physique de la circulation motorisée.</p>
+            </li>
+            <li><span class="legend-icon multipurpose-trail-icon"></span> Sentier polyvalent
+              <p>Un chemin en dehors de la route ou le long de celle-ci, où les piétons et les cyclistes peuvent circuler.</p>
+            </li>
           </ul>
 
           <button class="modal-close-btn" (click)="closeModal()">Fermer</button>
@@ -52,7 +65,7 @@
         </div>
 
       </div>
-      <app-dynamic-map></app-dynamic-map>
+      <app-dynamic-map [seasonType]="activeSeason" [showProtectedPaths]="showProtectedPaths" [showSharedPaths]="showSharedPaths"></app-dynamic-map>
     </div>
 
   </div>
