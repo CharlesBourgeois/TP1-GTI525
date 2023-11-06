@@ -45,10 +45,19 @@ export class StatistiquesComponent implements OnInit {
     }
 
     this.filteredRecords.sort((a, b) => {
-      if (a[this.currentSortField] < b[this.currentSortField]) {
+      let valueA = a[this.currentSortField];
+      let valueB = b[this.currentSortField];
+
+      // If the field is numeric, parse it as an integer
+      if (!isNaN(valueA) && !isNaN(valueB)) {
+        valueA = parseInt(valueA, 10);
+        valueB = parseInt(valueB, 10);
+      }
+
+      if (valueA < valueB) {
         return this.sortDirection === 'asc' ? -1 : 1;
       }
-      if (a[this.currentSortField] > b[this.currentSortField]) {
+      if (valueA > valueB) {
         return this.sortDirection === 'asc' ? 1 : -1;
       }
       return 0;

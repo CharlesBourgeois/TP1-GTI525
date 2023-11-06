@@ -5,14 +5,12 @@
       <p>Les différents point d'intérêts de la ville de montréal</p>
       <h6> Territoires</h6>
       <div>
-        <img src="../../assets/Agglo_550x480.jpg" alt="" class="img">
+        <div id='map' style='width: 290px; height: 300px;'></div>
       </div>
       <h6 class="top-margin"> Arrondissement</h6>
-      <select class="opt-width">
-        <option>Tous</option>
-        <option>Verdun</option>
-        <option>Plateau Mont-Royal</option>
-        <option>LaSalle</option>
+      <select class="opt-width" (change)="onSelectArrondissement($event)">
+        <option value="">Tous</option>
+        <option *ngFor="let arrondissement of territoires" [value]="arrondissement.id">{{ arrondissement.arrondissement }}</option>
       </select>
 
       <h6 class="top-margin"> Type de lieu</h6>
@@ -33,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let record of records | paginate: { itemsPerPage: 20, currentPage: currentPage }">
+          <tr *ngFor="let record of filteredFontaines | paginate: { itemsPerPage: 20, currentPage: currentPage }">
             <td>{{ record.Arrondissement }}</td>
             <td>Fontaine</td>
             <td>{{ record.Nom_parc_lieu }}</td>
