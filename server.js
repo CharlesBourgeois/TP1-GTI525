@@ -1,21 +1,48 @@
 const express = require('express');
-const path = require('path');
+const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
+const PORT = 8080;
 
-// Serve static files from the Angular app
-app.use(express.static(path.join(__dirname, 'dist/tp1-gti525-reseau-cyclabe')));
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/Dev', { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Add a simple route for hello world
-app.get('/hello', (req, res) => {
-  res.send('Hello World');
+app.use(express.json());
+app.use('/static', express.static('public'));
+app.use(cors({
+  origin: 'http://localhost:4200'
+}));
+
+// Endpoint pour "compteurs"
+app.get('/gti525/v1/compteurs/:compteurId', async (req, res) => {
+  const { debut, fin } = req.query; // Extracting the query parameters
+  //on ne les utilise pas encore
+
+  try {
+      const compteur = await Compteur.findById(req.params.compteurId);
+      if (!compteur) {
+          return res.status(404).json({ message: "Compteur not found" });
+      }
+      res.json(compteur);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
 });
 
-// All other routes should redirect to the Angular app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/tp1-gti525-reseau-cyclabe/index.html'));
+// Endpoint for "pistes"
+app.get('/gti525/v1/pistes', (req, res) => {
+    // Return the bike paths as JSON
+    // Here we are reading from a static file, but you can also connect to a database
+    res.sendFile(__dirname + '/src/assets/reseau_cyclable.geojson');
 });
 
-const port = process.env.PORT || '3000';
-app.set('port', port);
+// Endpoint for "pointsdinteret"
+app.get('/gti525/v1/pointsdinteret', (req, res) => {
+    // Return the points of interest as JSON
+    res.sendFile(__dirname + '/src/assets/fontaines.csv'); // Assuming this CSV is JSON-compatible
+});
 
-app.listen(port, () => console.log(`Server running on localhost:${port}`));
+// Starting the server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
