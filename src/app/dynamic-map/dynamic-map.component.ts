@@ -148,8 +148,9 @@ export class DynamicMapComponent implements OnInit, OnDestroy {
     // Function to add a category of paths to the map 
     const addCategoryPathsToMap = (path: any[], color: string, index: number) => {
       if (path && this.sourceLoaded) {
-        const sourceId = `path-source-${index}`; // Unique source ID
-        const layerId = `path-layer-${index}`;   // Unique layer ID
+        const sourceId = `path-source-${index}`; 
+        const layerId = `path-layer-${index}`; 
+         
         if (this.map.getLayer(layerId)) {
           console.log("remove itm1")
           this.map.removeLayer(layerId);
@@ -159,24 +160,25 @@ export class DynamicMapComponent implements OnInit, OnDestroy {
           this.map.removeSource(sourceId);
         }
       
-          this.map.addSource(sourceId, {
-            type: 'geojson',
-            data: {
-              type: 'FeatureCollection',
-              features: path,
-            },
-          });
-          this.map.addLayer({
-            id: layerId,
-            type: 'line',
-            source: sourceId,
-            layout: {},
-            paint: {
-              'line-color': color,
-              'line-width': 5,
-            },
-          });
-        }
+        this.map.addSource(sourceId, {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: path,
+          },
+        });
+
+        this.map.addLayer({
+          id: layerId,
+          type: 'line',
+          source: sourceId,
+          layout: {},
+          paint: {
+            'line-color': color,
+            'line-width': 5,
+           },
+        });
+      }
     };
 
     // Filter features for each category
