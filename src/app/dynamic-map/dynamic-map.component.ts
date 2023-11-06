@@ -16,7 +16,7 @@ export class DynamicMapComponent implements OnInit, OnDestroy {
   map!: mapboxgl.Map;
   sourceLoaded: boolean = false;
   bikePaths: any[] = [];
-  isActiveSeason: boolean = true; 
+  isActiveSeason: boolean = true;
 
   constructor(private http: HttpClient) { }
 
@@ -36,10 +36,10 @@ export class DynamicMapComponent implements OnInit, OnDestroy {
   ngOnInit() {
     (mapboxgl as any).accessToken = 'pk.eyJ1IjoiamJzaW1hcmQiLCJhIjoiY2xvaGV3YnVhMGF1eTJqbzV2a3lzc3FzeCJ9.1arX2YNM65XRaJQB_ewsWA';
     this.map = new mapboxgl.Map({
-      container: 'map', 
-      style: 'mapbox://styles/mapbox/streets-v12', 
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
       center: [-73.56, 45.5],
-      zoom: 10, 
+      zoom: 10,
     });
 
     this.map.on('load', () => {
@@ -55,7 +55,7 @@ export class DynamicMapComponent implements OnInit, OnDestroy {
     });
   }
 
-  filterForActiveSeason(featureCollection: any) {  
+  filterForActiveSeason(featureCollection: any) {
     let filteredFeatures = featureCollection.features;
 
     const showProtected = this.showProtectedPaths;
@@ -66,19 +66,19 @@ export class DynamicMapComponent implements OnInit, OnDestroy {
       console.log(filteredFeatures)
       filteredFeatures = filteredFeatures.filter((feature: any) =>
         feature.properties && (
-          feature.properties.TYPE_VOIE_CODE === '4' || 
-          feature.properties.TYPE_VOIE_CODE === '5' || 
-          feature.properties.TYPE_VOIE_CODE === '6' || 
+          feature.properties.TYPE_VOIE_CODE === '4' ||
+          feature.properties.TYPE_VOIE_CODE === '5' ||
+          feature.properties.TYPE_VOIE_CODE === '6' ||
           feature.properties.TYPE_VOIE_CODE === '7'
-        )   
+        )
       );
     } else if (!showProtected && showShared) {
       // Filter for shared paths
       filteredFeatures = filteredFeatures.filter((feature: any) =>
         feature.properties && (
-          feature.properties.TYPE_VOIE_CODE === '1' || 
-          feature.properties.TYPE_VOIE_CODE === '3' || 
-          feature.properties.TYPE_VOIE_CODE === '8' || 
+          feature.properties.TYPE_VOIE_CODE === '1' ||
+          feature.properties.TYPE_VOIE_CODE === '3' ||
+          feature.properties.TYPE_VOIE_CODE === '8' ||
           feature.properties.TYPE_VOIE_CODE === '9'
         )
       );
@@ -86,14 +86,14 @@ export class DynamicMapComponent implements OnInit, OnDestroy {
 
     // When the season is not "Saisonnier", filter paths with property 'SAISONS4' set to 'Oui'
     if (this.seasonType !== "Saisonnier") {
-       filteredFeatures = filteredFeatures.filter((feature: any) =>
-       feature.properties && feature.properties.SAISONS4 === 'Oui'
-       );
-    } 
-  
-     return filteredFeatures;
+      filteredFeatures = filteredFeatures.filter((feature: any) =>
+        feature.properties && feature.properties.SAISONS4 === 'Oui'
+      );
+    }
+
+    return filteredFeatures;
   }
- 
+
 
   private addPaths() {
     console.log(this.bikePaths);
@@ -127,6 +127,6 @@ export class DynamicMapComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.map.remove(); 
+    this.map.remove();
   }
 }
