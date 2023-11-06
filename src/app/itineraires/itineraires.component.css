@@ -233,3 +233,16 @@ button:hover {
 .button:focus, .button:active {
   background-color: #6B8EFC;
 }
+
+/* Switch button css for split screen */
+@media screen and (max-width: 1000px) {
+  .left-section {
+    flex: 0 0 30%; 
+  }
+  .button-group {
+    flex-direction: column;
+  }
+  .button {
+    box-sizing: border-box;  
+  }
+}
