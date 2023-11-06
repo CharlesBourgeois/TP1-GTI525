@@ -15,7 +15,6 @@ app.use(cors({
   origin: 'http://localhost:4200'
 }));
 
-
 function findCompteurById(compteurId, callback) {
   let foundCompteur = null;
   fs.createReadStream(__dirname + '/src/assets/compteurs.csv')
@@ -29,7 +28,6 @@ function findCompteurById(compteurId, callback) {
       callback(foundCompteur);
     });
 }
-
 
 // Endpoint pour "compteurs"
 app.get('/gti525/v1/compteurs/:compteurId', async (req, res) => {
@@ -47,7 +45,6 @@ app.get('/gti525/v1/compteurs/:compteurId', async (req, res) => {
 // Endpoint for "pistes"
 app.get('/gti525/v1/pistes', (req, res) => {
     // Return the bike paths as JSON
-    // Here we are reading from a static file, but you can also connect to a database
     res.sendFile(__dirname + '/src/assets/reseau_cyclable.geojson');
 });
 
