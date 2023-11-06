@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const fs = require('fs');
+const csv = require('csv-parser');
 const cors = require('cors');
 const app = express();
 const PORT = 8080;
@@ -13,20 +15,33 @@ app.use(cors({
   origin: 'http://localhost:4200'
 }));
 
+
+function findCompteurById(compteurId, callback) {
+  let foundCompteur = null;
+  fs.createReadStream(__dirname + '/src/assets/compteurs.csv')
+    .pipe(csv())
+    .on('data', (row) => {
+      if (row.ID === compteurId) {
+        foundCompteur = row;
+      }
+    })
+    .on('end', () => {
+      callback(foundCompteur);
+    });
+}
+
+
 // Endpoint pour "compteurs"
 app.get('/gti525/v1/compteurs/:compteurId', async (req, res) => {
-  const { debut, fin } = req.query; // Extracting the query parameters
-  //on ne les utilise pas encore
+  const { debut, fin } = req.query; 
+  const { compteurId } = req.params;
 
-  try {
-      const compteur = await Compteur.findById(req.params.compteurId);
-      if (!compteur) {
-          return res.status(404).json({ message: "Compteur not found" });
-      }
-      res.json(compteur);
-  } catch (error) {
-      res.status(500).json({ message: error.message });
-  }
+  findCompteurById(compteurId, (compteur) => {
+    if (!compteur) {
+      return res.status(404).json({ message: "Compteur not found" });
+    }
+    res.json(compteur);
+  });
 });
 
 // Endpoint for "pistes"
