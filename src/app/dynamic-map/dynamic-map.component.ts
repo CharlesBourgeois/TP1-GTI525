@@ -96,35 +96,101 @@ export class DynamicMapComponent implements OnInit, OnDestroy {
  
 
   private addPaths() {
-    console.log(this.bikePaths);
-    if (this.bikePaths && this.sourceLoaded) {
-      if (this.map.getSource('paths')) {
-        (this.map.getSource('paths') as mapboxgl.GeoJSONSource).setData({
-          type: 'FeatureCollection',
-          features: this.bikePaths,
-        });
-      } else {
-        this.map.addSource('paths', {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: this.bikePaths,
-          },
-        });
-
-        this.map.addLayer({
-          id: 'paths',
-          type: 'line',
-          source: 'paths',
-          layout: {},
-          paint: {
-            'line-color': '#ff0000',
-            'line-width': 5,
-          },
-        });
+    
+    // Define path types and their corresponding colors
+    const pathCategories = {
+      REV: {
+        revAvancementCodes: ['EV', 'PE', 'TR'],
+        color: '#2AC7DD' 
+      },
+      shared: {
+        avancementCodes: ['E'],
+        typeVoieCodes: ['1', '3', '8', '9'],
+        color: '#84CA4B' 
+      },
+      protected: {
+        avancementCodes: ['E'],
+        revAvancementCodes: ['EV', 'PE', 'TR'],
+        typeVoieCodes: ['4', '5', '6', '7'],
+        color: '#025D29' 
+      },
+      polyvalent: {
+        avancementCodes: ['E'],
+        typeVoieCodes: ['7'],
+        color: '#B958D9'
       }
-    }
-  }
+    };
+    
+    // Filter the features into categories
+    const filterFeaturesByCategory = (features : any[], category : any) => {
+      return features.filter(feature => {
+        const props = feature.properties;
+        //Check if filtering for shared and polyvalent paths
+        if (category === pathCategories.shared || category === pathCategories.polyvalent) {
+          return props &&
+            category.avancementCodes.includes(props.AVANCEMENT_CODE) &&
+            category.typeVoieCodes.includes(props.TYPE_VOIE_CODE);
+        }
+        // Check for REV paths
+        if (category === pathCategories.REV) {
+          return props && category.revAvancementCodes.includes(props.REV_AVANCEMENT_CODE);
+        }
+        // Check for protected paths
+        if (category === pathCategories.protected) {
+          return props &&
+            category.avancementCodes.includes(props.AVANCEMENT_CODE) &&
+            category.typeVoieCodes.includes(props.TYPE_VOIE_CODE) &&
+            !category.revAvancementCodes.includes(props.REV_AVANCEMENT_CODE);
+        }
+      });
+    };
+
+    // Function to add a category of paths to the map 
+    const addCategoryPathsToMap = (path: any[], color: string, index: number) => {
+      if (path && this.sourceLoaded) {
+        const sourceId = `path-source-${index}`; // Unique source ID
+        const layerId = `path-layer-${index}`;   // Unique layer ID
+        if (this.map.getLayer(layerId)) {
+          console.log("remove itm1")
+          this.map.removeLayer(layerId);
+        }
+        if (this.map.getSource(sourceId)) {
+          console.log("remove it")
+          this.map.removeSource(sourceId);
+        }
+      
+          this.map.addSource(sourceId, {
+            type: 'geojson',
+            data: {
+              type: 'FeatureCollection',
+              features: path,
+            },
+          });
+          this.map.addLayer({
+            id: layerId,
+            type: 'line',
+            source: sourceId,
+            layout: {},
+            paint: {
+              'line-color': color,
+              'line-width': 5,
+            },
+          });
+        }
+    };
+
+    // Filter features for each category
+    const REVPaths = filterFeaturesByCategory(this.bikePaths, pathCategories.REV);
+    const sharedPaths = filterFeaturesByCategory(this.bikePaths, pathCategories.shared);
+    const protectedPaths = filterFeaturesByCategory(this.bikePaths, pathCategories.protected);
+    const polyvalentPaths = filterFeaturesByCategory(this.bikePaths, pathCategories.polyvalent);
+
+    // Add paths to the map for each category
+    addCategoryPathsToMap(protectedPaths, pathCategories.protected.color, 0);
+    addCategoryPathsToMap(sharedPaths, pathCategories.shared.color , 1);
+    addCategoryPathsToMap(REVPaths, pathCategories.REV.color, 2);
+    addCategoryPathsToMap(polyvalentPaths, pathCategories.polyvalent.color, 3);
+}
 
   ngOnDestroy() {
     this.map.remove(); 
