@@ -133,3 +133,17 @@ th span {
   right: 8px;
   font-size: 0.8em;
 }
+
+.toggle-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.toggle-button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

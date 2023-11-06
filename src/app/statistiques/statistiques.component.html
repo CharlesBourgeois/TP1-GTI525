@@ -3,42 +3,88 @@
     <div class="left-section">
       <h3>Statistiques</h3>
       <p>Statistiques des pistes cyclables de Montréal</p>
-      <h6 class="top-margin"> Les plus populaires par période</h6>
+      <h6 class="top-margin">Les plus populaires par période</h6>
       <input type="date" class="input-width" />
-      <h6 class="top-margin"> Recherche de compteur</h6>
+      <h6 class="top-margin">Recherche de compteur</h6>
       <div class="flex">
-        <input type="text" class="input-width" [(ngModel)]="searchTerm" (keyup)="filterRecords()" />
+        <input
+          type="text"
+          class="input-width"
+          [(ngModel)]="searchTerm"
+          (keyup)="filterRecords()"
+        />
         <button class="left-margin button-width"></button>
       </div>
     </div>
     <div class="right-section">
-      <table>
-        <thead>
-          <tr>
-            <th (click)="sortRecords('ID')">Identifiant
-              <span *ngIf="currentSortField === 'ID'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
-            </th>
-            <th (click)="sortRecords('Nom')">Nom
-              <span *ngIf="currentSortField === 'Nom'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
-            </th>
-            <th (click)="sortRecords('Statut')">Statut
-              <span *ngIf="currentSortField === 'Statut'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
-            </th>
-            <th (click)="sortRecords('Annee_implante')">Année d'implantation
-              <span *ngIf="currentSortField === 'Annee_implante'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let record of filteredRecords | paginate: { itemsPerPage: 15, currentPage: currentPage }">
-            <td>{{ record.ID }}</td>
-            <td>{{ record.Nom }}</td>
-            <td>{{ record.Statut }}</td>
-            <td>{{ record.Annee_implante }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+      <div class="toggle-buttons-container">
+        <button class="toggle-button" (click)="toggleView('list')">
+          Liste des capteurs
+        </button>
+        <button class="toggle-button" (click)="toggleView('map')">
+          Carte des capteurs
+        </button>
+      </div>
+      <div class="sensor-list" *ngIf="currentView === 'list'">
+        <table>
+          <thead>
+            <tr>
+              <th (click)="sortRecords('ID')">
+                Identifiant
+                <span *ngIf="currentSortField === 'ID'">{{
+                  sortDirection === "asc" ? "▲" : "▼"
+                }}</span>
+              </th>
+              <th (click)="sortRecords('Nom')">
+                Nom
+                <span *ngIf="currentSortField === 'Nom'">{{
+                  sortDirection === "asc" ? "▲" : "▼"
+                }}</span>
+              </th>
+              <th (click)="sortRecords('Statut')">
+                Statut
+                <span *ngIf="currentSortField === 'Statut'">{{
+                  sortDirection === "asc" ? "▲" : "▼"
+                }}</span>
+              </th>
+              <th (click)="sortRecords('Annee_implante')">
+                Année d'implantation
+                <span *ngIf="currentSortField === 'Annee_implante'">{{
+                  sortDirection === "asc" ? "▲" : "▼"
+                }}</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let record of filteredRecords
+                  | paginate : { itemsPerPage: 15, currentPage: currentPage }
+              "
+            >
+              <td>{{ record.ID }}</td>
+              <td>{{ record.Nom }}</td>
+              <td>{{ record.Statut }}</td>
+              <td>{{ record.Annee_implante }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sensor-map" *ngIf="currentView === 'map'">
+        <div id="map" style="height: 600px"></div>
+      </div>
+      <pagination-controls
+        (pageChange)="currentPage = $event"
+      ></pagination-controls>
+    </div>
+  </div>
+  <!-- Modal Triggered by Clicking on Map Points -->
+  <div class="modal" *ngIf="isModalVisible">
+    <div class="modal-content">
+      <span class="close" (click)="isModalVisible = false">&times;</span>
+      <h2>Statistiques des passages: {{ selectedPointData?.Nom }}</h2>
+
+      <button (click)="isModalVisible = false">Fermer</button>
     </div>
   </div>
 </div>
