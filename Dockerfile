@@ -11,7 +11,7 @@ FROM node:19
 WORKDIR /server
 COPY --from=build-step /app/dist/tp1-gti525-reseau-cyclabe /server/dist/tp1-gti525-reseau-cyclabe
 COPY src/assets src/assets
-COPY server.js package.json package-lock.json ./
+COPY src/backend package.json package-lock.json ./
 RUN npm install
 EXPOSE 3000
 CMD ["node", "server.js"]

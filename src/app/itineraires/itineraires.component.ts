@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-itineraires',
@@ -11,8 +11,9 @@ export class ItinerairesComponent {
   showProtectedPaths: boolean = false;
   showSharedPaths: boolean = false;
 
-  constructor() { }  
-  
+  constructor() {
+  }
+
   // Function to open the modal
   openModal() {
     const modal = document.getElementById('myModal');
@@ -28,7 +29,7 @@ export class ItinerairesComponent {
       modal.style.display = 'none';
     }
   }
-  
+
   setActiveSeason(season: string): void {
     this.activeSeason = season;
   }
