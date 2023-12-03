@@ -44,4 +44,6 @@ You can either use docker-desktop straight in windows or do the WSL2 ubuntu setu
 ## Start docker
 `docker-compose up`
 
+## Fill the DB
+
 
