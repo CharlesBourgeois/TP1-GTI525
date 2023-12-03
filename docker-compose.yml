@@ -21,6 +21,7 @@ services:
       dockerfile: Dockerfile  # Assuming you have a Dockerfile in the server directory
     ports:
       - "3000:3000"  # Express server port
+      - "8080:8080"
     depends_on:
       - mongodb
 
