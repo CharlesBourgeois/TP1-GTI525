@@ -19,7 +19,9 @@ const passageSchema = new mongoose.Schema({
   "100057051": Number, "100057052": Number, "100057053": Number,
   "100057500": Number, "300014916": Number, "300014985": Number,
   "300014986": Number, "300014993": Number, "300014994": Number,
-  "300014995": Number, "300014996": Number, "300020478": Number
+  "300014995": Number, "300014996": Number, "300020478": Number,
+  "300021685": Number, "300022314": Number, "300020679": Number,
+  "300020816": Number, "300028650": Number
 }, {
   timestamps: false,
   collection: 'ComptageVelo'
