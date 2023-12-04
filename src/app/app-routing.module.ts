@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'itineraires', component: ItinerairesComponent },
   { path: 'statistiques', component: StatistiquesComponent },
   { path: 'interet', component: InteretComponent },
-  { path: 'ajouter-interet', component: AjouterInteretsComponent }
+  { path: 'ajouter-interet/:editingInterestPointId', component: AjouterInteretsComponent},
+  { path: 'ajouter-interet', component: AjouterInteretsComponent }, 
 ];
 
 @NgModule({

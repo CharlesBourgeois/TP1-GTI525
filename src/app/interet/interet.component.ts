@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { CSP_NONCE, Component, Input, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CsvService } from '../csv.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-interet',
@@ -20,14 +21,12 @@ export class InteretComponent implements OnInit {
   public geojsonData: any;
   showActionMenu = false;
 
-
   public type: string = '';
   public territoire: string = ''; 
   public nom: string | null = null;
   selectedRowIndex: number | null = null;
 
-
-  constructor(private http: HttpClient, private csvService: CsvService) {
+  constructor(private http: HttpClient, private csvService: CsvService, private router: Router) {
     (mapboxgl as any).accessToken = 'pk.eyJ1IjoiamJzaW1hcmQiLCJhIjoiY2xvaGV3YnVhMGF1eTJqbzV2a3lzc3FzeCJ9.1arX2YNM65XRaJQB_ewsWA';
   }
 
@@ -166,7 +165,6 @@ export class InteretComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     const selectedText = selectElement.value;
     this.type = selectedText === "Tous" ? "" : selectedText;
-    console.log(this.type);
     this.loadPointsOfInterest();
   }
 
@@ -201,11 +199,29 @@ export class InteretComponent implements OnInit {
   
 
   editPointOfInterest() {
-    console.log("edit");
+    if (this.selectedRowIndex != null) {
+      const pointId = this.filteredFontaines[this.selectedRowIndex].ID;
+      this.router.navigate(['/ajouter-interet', pointId]);
+    } else {
+      console.log('No row selected');
+    }
   }
   
   deletePointOfInterest() {
-    console.log("delete");
+    if (this.selectedRowIndex != null) {
+      const pointId = this.filteredFontaines[this.selectedRowIndex].ID;
+      console.log(pointId);
+      this.http.delete(`http://localhost:8080/gti525/v1/pointsdinteret/${pointId}`)
+        .subscribe(
+          response => {
+            console.log('Point of interest deleted successfully');
+            this.loadPointsOfInterest();
+          },
+          error => console.error('Error deleting point of interest:', error)
+        );
+    } else {
+      console.log('No row selected');
+    }
   }
   
   toggleActionMenu(): void {

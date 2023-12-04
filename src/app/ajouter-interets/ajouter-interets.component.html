@@ -21,29 +21,23 @@
             </div>
             <div class="col-md-6 form-group">
                 <label for="postalCode">Code postal</label>
-                <input type="text" id="postalCode" class="form-control" [(ngModel)]="interestPoint.postalCode" name="postalCode" required>
-                <div *ngIf="submitted && !interestPointForm.controls['postalCode'].value" class="error">
-                    Le code postal est obligatoire.
-                </div>
+                <input type="text" id="postalCode" class="form-control" [(ngModel)]="interestPoint.postalCode" name="postalCode">
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6 form-group">
                 <label for="district">Arrondissement</label>        
-                <select id="district" class="form-control" [(ngModel)]="interestPoint.district" name="district" required>
-                    <option *ngFor="let arrondissement of territoires" [value]="arrondissement.id">{{ arrondissement.arrondissement }}</option>
-                </select>
+               <select id="district" class="form-control" [(ngModel)]="interestPoint.arrondissementText" name="district" required>
+                 <option *ngFor="let arrondissement of territoires" [value]="arrondissement.arrondissement">{{ arrondissement.arrondissement }}</option>
+               </select>
                 <div *ngIf="submitted && !interestPointForm.controls['district'].value" class="error">
                     L'arrondissement est obligatoire.
                 </div>
             </div>
             <div class="col-md-6 form-group">
                 <label for="availability">Disponible depuis</label>
-                <input type="date" id="availability" class="form-control" [(ngModel)]="interestPoint.availability" name="availability" required>
-                <div *ngIf="submitted && !interestPointForm.controls['availability'].value" class="error">
-                    La date de disponibilité est obligatoire.
-                </div>
+                <input type="date" id="availability" class="form-control" [(ngModel)]="interestPoint.availability" name="availability">
             </div>
         </div>
 
@@ -52,7 +46,7 @@
                 <label for="type">Type de lieu</label>
                 <select id="type" class="form-control" [(ngModel)]="interestPoint.type" name="type" (change)="onTypeChange()" required>
                     <option value="fountain">Fontaine à boire</option>
-                    <option value="workshop">Atelier de réparation vélo</option>
+                    <option value="Atelier réparation">Atelier de réparation vélo</option>
                 </select>
                 <div *ngIf="submitted && !interestPointForm.controls['type'].value" class="error">
                     Le type de lieu est obligatoire.
@@ -73,6 +67,14 @@
                 <label for="remarks">Remarques</label>
                 <textarea id="remarks" class="form-control" rows="3" [(ngModel)]="interestPoint.remarks" name="remarks"></textarea>
             </div>
+        </div>
+
+        <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
         </div>
 
         <div class="form-actions text-right">
