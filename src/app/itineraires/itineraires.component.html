@@ -6,8 +6,10 @@
       <h6> Réseaux</h6>
 
       <div class="button-group">
-        <button id="saisonnier-btn" class="button" [class.active]="activeSeason === 'Saisonnier'" (click)="setActiveSeason('Saisonnier')">Saisonnier</button>
-        <button id="quatre-saisons-btn" class="button" [class.active]="activeSeason === '4 saisons'" (click)="setActiveSeason('4 saisons')">4 saisons</button>
+        <button id="saisonnier-btn" class="button" [class.active]="activeSeason === 'Saisonnier'"
+          (click)="setActiveSeason('Saisonnier')">Saisonnier</button>
+        <button id="quatre-saisons-btn" class="button" [class.active]="activeSeason === '4 saisons'"
+          (click)="setActiveSeason('4 saisons')">4 saisons</button>
       </div>
 
       <div class="top-margin">
@@ -27,14 +29,23 @@
       <h6 class="top-margin"> Les plus populaires par période</h6>
       <div class="flex">
         <p class="right-margin p-width">De:</p>
-        <input type="date" class="input-width" />
+        <input type="date" class="input-width" [(ngModel)]="startDate" />
       </div>
       <div class="flex top-margin">
         <p class="right-margin p-width">À:</p>
-        <input type="date" class="input-width" />
+        <input type="date" class="input-width" [(ngModel)]="endDate" />
+      </div>
+      <button class="button" (click)="fetchPopularTracks()">Chercher Pistes Populaires</button>
+      <div *ngIf="topArrondissements">
+        <p>Les 3 arrondissements les plus populaires sont :</p>
+        <ul>
+          <li *ngFor="let arrondissement of objectKeys(topArrondissements)">
+            {{ arrondissement }}: {{ topArrondissements[arrondissement] }}
+          </li>
+        </ul>
       </div>
     </div>
-    
+
     <!-- right-section -->
     <div class="right-section">
       <div class="info-icon" (click)="openModal()">i</div>
@@ -56,7 +67,8 @@
               <p>Une voie distincte, séparée par un élément physique de la circulation motorisée.</p>
             </li>
             <li><span class="legend-icon multipurpose-trail-icon"></span> Sentier polyvalent
-              <p>Un chemin en dehors de la route ou le long de celle-ci, où les piétons et les cyclistes peuvent circuler.</p>
+              <p>Un chemin en dehors de la route ou le long de celle-ci, où les piétons et les cyclistes peuvent
+                circuler.</p>
             </li>
           </ul>
 
@@ -65,7 +77,8 @@
         </div>
 
       </div>
-      <app-dynamic-map [seasonType]="activeSeason" [showProtectedPaths]="showProtectedPaths" [showSharedPaths]="showSharedPaths"></app-dynamic-map>
+      <app-dynamic-map [seasonType]="activeSeason" [showProtectedPaths]="showProtectedPaths"
+        [showSharedPaths]="showSharedPaths"></app-dynamic-map>
     </div>
 
   </div>
