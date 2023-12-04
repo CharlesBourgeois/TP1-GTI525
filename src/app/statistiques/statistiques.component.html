@@ -7,13 +7,8 @@
       <input type="date" class="input-width" />
       <h6 class="top-margin">Recherche de compteur</h6>
       <div class="flex">
-        <input
-          type="text"
-          class="input-width"
-          [(ngModel)]="searchTerm"
-          (keyup)="filterRecords()"
-        />
-        <button class="left-margin button-width"></button>
+        <input type="text" class="input-width" [(ngModel)]="searchTerm" />
+        <button class="left-margin button-width" (click)="searchRecords()"></button>
       </div>
     </div>
     <div class="right-section">
@@ -33,35 +28,33 @@
                 Identifiant
                 <span *ngIf="currentSortField === 'ID'">{{
                   sortDirection === "asc" ? "▲" : "▼"
-                }}</span>
+                  }}</span>
               </th>
               <th (click)="sortRecords('Nom')">
                 Nom
                 <span *ngIf="currentSortField === 'Nom'">{{
                   sortDirection === "asc" ? "▲" : "▼"
-                }}</span>
+                  }}</span>
               </th>
               <th (click)="sortRecords('Statut')">
                 Statut
                 <span *ngIf="currentSortField === 'Statut'">{{
                   sortDirection === "asc" ? "▲" : "▼"
-                }}</span>
+                  }}</span>
               </th>
               <th (click)="sortRecords('Annee_implante')">
                 Année d'implantation
                 <span *ngIf="currentSortField === 'Annee_implante'">{{
                   sortDirection === "asc" ? "▲" : "▼"
-                }}</span>
+                  }}</span>
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let record of filteredRecords
                   | paginate : { itemsPerPage: 15, currentPage: currentPage }
-              "
-            >
+              ">
               <td>{{ record.ID }}</td>
               <td>{{ record.Nom }}</td>
               <td>{{ record.Statut }}</td>
@@ -73,9 +66,7 @@
       <div class="sensor-map" *ngIf="currentView === 'map'">
         <div id="map" style="height: 600px"></div>
       </div>
-      <pagination-controls
-        (pageChange)="currentPage = $event"
-      ></pagination-controls>
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
     </div>
   </div>
   <!-- Modal Triggered by Clicking on Map Points -->

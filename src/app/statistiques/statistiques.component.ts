@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CsvService } from '../csv.service';
 import * as mapboxgl from 'mapbox-gl';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-statistiques',
@@ -22,21 +23,45 @@ export class StatistiquesComponent implements OnInit {
   lng = -73.5673; // default longitude
 
   constructor(
-    private csvService: CsvService,
+    private apiService: ApiService,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
-    this.csvService.loadData('assets/compteurs.csv').then((data) => {
-      this.records = data;
-      this.filteredRecords = [...this.records];
-    });
+    this.apiService
+      .loadData('http://localhost:8080/gti525/v1/compteurs?limite=10000')
+      .subscribe(
+        (data) => {
+          this.records = data;
+          this.filteredRecords = [...this.records];
+        },
+        (error) => {
+          console.error('Error fetching data: ', error);
+        }
+      );
   }
 
   ngAfterViewInit() {
     this.initializeMap();
   }
 
+  searchRecords() {
+    this.apiService
+      .loadDataWithParams('http://localhost:8080/gti525/v1/compteurs', {
+        limite: 10,
+        nom: this.searchTerm,
+      })
+      .subscribe(
+        (data) => {
+          this.filteredRecords = data;
+          console.log(this.filterRecords);
+
+        },
+        (error) => {
+          console.error('Error fetching data: ', error);
+        }
+      );
+  }
   private convertToGeoJSON(
     records: any[]
   ): GeoJSON.FeatureCollection<GeoJSON.Point> {
