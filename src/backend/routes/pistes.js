@@ -1,12 +1,8 @@
 const express = require('express');
 const router = express.Router();
-<<<<<<< HEAD
+const Passage = require("../models/Passage");
+const Compteur = require("../models/Compteur");
 const Piste = require('../models/Piste');
-const Passage = require("../models/Passage"); // Assuming the model is in the 'models' directory
-const Compteur = require("../models/Compteur"); // Assuming the model is in the 'models' directory
-=======
-const Piste = require('../models/Piste'); 
->>>>>>> T4-charles
 
 
 router.get('/', async (req, res) => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const PointDInteret = require('../models/PointDInteret'); 
+const PointDInteret = require('../models/PointDInteret');
 
 router.get('/', async (req, res) => {
   try {
@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const id = req.params.id; 
+    const id = req.params.id;
     const pointDInteret = await PointDInteret.findOne({ ID: id });
     if (!pointDInteret) {
       return res.status(404).json({ message: "Point of interest not found" });
@@ -67,7 +67,7 @@ router.patch('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const updates = req.body;
-    const pointDInteret = await PointDInteret.findOneAndUpdate({ ID: id }, updates, { new: true }); 
+    const pointDInteret = await PointDInteret.findOneAndUpdate({ ID: id }, updates, { new: true });
     if (!pointDInteret) {
       return res.status(404).json({ message: "Point of interest not found" });
     }
@@ -85,7 +85,7 @@ router.delete('/:id', async (req, res) => {
     if (!pointDInteret) {
       return res.status(404).json({ message: "Point of interest not found" });
     }
-    res.status(204).send(); // No content to send back
+    res.status(204).send();
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error", error });
   }

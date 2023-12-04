@@ -29,7 +29,7 @@ const PisteSchema = new mongoose.Schema({
   },
   geometry: {
     type: { type: String, enum: ['LineString'], default: 'LineString' },
-    coordinates: [[[Number]]] // Array of arrays of arrays of numbers
+    coordinates: [[[Number]]]
   }
 }, { collection: 'Reseau_cyclable' });
 
