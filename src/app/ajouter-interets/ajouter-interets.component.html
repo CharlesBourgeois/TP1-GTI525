@@ -1,0 +1,83 @@
+<div class="add-interest-point">
+    <form (ngSubmit)="onSubmit()" #interestPointForm="ngForm" class="interest-point-form">
+        <h2>Ajout d'un nouveau point d'intérêt</h2>
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="name">Nom du lieu</label>
+                <input type="text" id="name" class="form-control" [(ngModel)]="interestPoint.name" name="name" required>
+                <div *ngIf="submitted && !interestPointForm.controls['name'].value" class="error">
+                    Le nom du lieu est obligatoire.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label for="address">Adresse</label>
+                <input type="text" id="address" class="form-control" [(ngModel)]="interestPoint.address" name="address" required>
+                <div *ngIf="submitted && !interestPointForm.controls['address'].value" class="error">
+                    L'adresse est obligatoire.
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="postalCode">Code postal</label>
+                <input type="text" id="postalCode" class="form-control" [(ngModel)]="interestPoint.postalCode" name="postalCode" required>
+                <div *ngIf="submitted && !interestPointForm.controls['postalCode'].value" class="error">
+                    Le code postal est obligatoire.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label for="district">Arrondissement</label>        
+                <select id="district" class="form-control" [(ngModel)]="interestPoint.district" name="district" required>
+                    <option *ngFor="let arrondissement of territoires" [value]="arrondissement.id">{{ arrondissement.arrondissement }}</option>
+                </select>
+                <div *ngIf="submitted && !interestPointForm.controls['district'].value" class="error">
+                    L'arrondissement est obligatoire.
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="availability">Disponible depuis</label>
+                <input type="date" id="availability" class="form-control" [(ngModel)]="interestPoint.availability" name="availability" required>
+                <div *ngIf="submitted && !interestPointForm.controls['availability'].value" class="error">
+                    La date de disponibilité est obligatoire.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <label for="type">Type de lieu</label>
+                <select id="type" class="form-control" [(ngModel)]="interestPoint.type" name="type" (change)="onTypeChange()" required>
+                    <option value="fountain">Fontaine à boire</option>
+                    <option value="workshop">Atelier de réparation vélo</option>
+                </select>
+                <div *ngIf="submitted && !interestPointForm.controls['type'].value" class="error">
+                    Le type de lieu est obligatoire.
+                </div>
+            </div>
+            <div class="col-md-4 form-group" *ngIf="interestPoint.type === 'fountain'">
+                <label for="latitude">Latitude</label>
+                <input type="text" id="latitude" class="form-control" [(ngModel)]="interestPoint.latitude" name="latitude">
+            </div>
+            <div class="col-md-4 form-group" *ngIf="interestPoint.type === 'fountain'">
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude" class="form-control" [(ngModel)]="interestPoint.longitude" name="longitude">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="remarks">Remarques</label>
+                <textarea id="remarks" class="form-control" rows="3" [(ngModel)]="interestPoint.remarks" name="remarks"></textarea>
+            </div>
+        </div>
+
+        <div class="form-actions text-right">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <button type="button" class="btn btn-secondary" (click)="cancel()">Effacer</button>
+        </div>
+    </form>
+</div>

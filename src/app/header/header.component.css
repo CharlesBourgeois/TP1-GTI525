@@ -5,3 +5,11 @@
 a{
     margin: 0px 10px 0px 10px;
 }
+
+.dropdown-menu {
+    display: none;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}

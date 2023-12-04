@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Compteur = require('../models/Compteur'); // Assuming the model is in the 'models' directory
-const Passage = require('../models/Passage'); // This would be your model for the passages, adjust as needed
+const Compteur = require('../models/Compteur'); 
+const Passage = require('../models/Passage'); 
 
 router.get('/', async (req, res) => {
   try {
-    const limite = parseInt(req.query.limite) || 10; // Default to 10 if not provided
-    const page = parseInt(req.query.page) || 1; // Default to page 1 if not provided
+    const limite = parseInt(req.query.limite) || 10; 
+    const page = parseInt(req.query.page) || 1;
     const implantation = req.query.implantation;
     const nom = req.query.nom;
 
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
       query.Anee_implante = implantation;
     }
     if (nom) {
-      query.Nom = {$regex: nom, $options: 'i'}; // Case-insensitive search
+      query.Nom = {$regex: nom, $options: 'i'}; 
     }
 
     const compteurs = await Compteur.find(query)
@@ -32,7 +32,6 @@ router.get('/:id', async (req, res) => {
   const compteurId = req.params.id;
 
   try {
-    // Find the compteur by ID using Mongoose
     const compteur = await Compteur.findOne({ ID: compteurId });
 
     if (!compteur) {

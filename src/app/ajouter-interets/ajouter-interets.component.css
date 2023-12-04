@@ -1,0 +1,56 @@
+.add-interest-point {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.interest-point-form {
+    max-width: 800px; 
+    margin: auto;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-md-6 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+}
+
+.form-group {
+    margin-bottom: 0.5rem; 
+}
+
+.label {
+    font-size: 0.9rem; 
+}
+
+.input {
+    font-size: 0.9rem; 
+}
+
+.form-actions {
+    margin-top: 1rem;
+    text-align: right; 
+}
+
+.btn {
+    padding: .375rem .75rem; 
+}
+
+@media (min-width: 768px) {
+    .col-md-6 {
+        width: 50%;
+    }
+}
+
+.error{
+    color:red;
+}
