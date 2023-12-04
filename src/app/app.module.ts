@@ -15,6 +15,7 @@ import { ItinerairesComponent } from './itineraires/itineraires.component';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { InteretComponent } from './interet/interet.component';
 import { DynamicMapComponent } from './dynamic-map/dynamic-map.component';
+import { AjouterInteretsComponent } from './ajouter-interets/ajouter-interets.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DynamicMapComponent } from './dynamic-map/dynamic-map.component';
     ItinerairesComponent,
     StatistiquesComponent,
     InteretComponent,
-    DynamicMapComponent
+    DynamicMapComponent,
+    AjouterInteretsComponent
   ],
   imports: [
     BrowserModule,

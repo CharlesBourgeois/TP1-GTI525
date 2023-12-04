@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const PointDInteret = require('../models/PointDInteret'); // assuming you have a model file
+const PointDInteret = require('../models/PointDInteret'); 
 
-// Get a list of points of interest with optional filtering and pagination
 router.get('/', async (req, res) => {
   try {
     const limite = parseInt(req.query.limite, 10) || 10;
@@ -14,6 +13,9 @@ router.get('/', async (req, res) => {
     let query = {};
     if (territoire) {
       query.Arrondissement = territoire;
+    }
+    if (type === 'Atelier réparation') {
+      query.Etat = 'Atelier réparation';
     }
     if (nom) {
       query.Nom_parc_lieu = {$regex: nom, $options: 'i'};
@@ -36,11 +38,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get a single point of interest by ID
 router.get('/:id', async (req, res) => {
   try {
-    const id = req.params.id; // Get the custom ID from the request parameters
-    const pointDInteret = await PointDInteret.findOne({ ID: id }); // Use findOne to search by custom ID
+    const id = req.params.id; 
+    const pointDInteret = await PointDInteret.findOne({ ID: id });
     if (!pointDInteret) {
       return res.status(404).json({ message: "Point of interest not found" });
     }
@@ -51,11 +52,10 @@ router.get('/:id', async (req, res) => {
 });
 
 
-// Add a new point of interest
 router.post('/', async (req, res) => {
   try {
-    const newPointDInteret = new PointDInteret(req.body); // Create a new document from the request body
-    const savedPointDInteret = await newPointDInteret.save(); // Save it to the database
+    const newPointDInteret = new PointDInteret(req.body);
+    const savedPointDInteret = await newPointDInteret.save();
     res.status(201).json(savedPointDInteret);
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error", error });
@@ -67,7 +67,7 @@ router.patch('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const updates = req.body;
-    const pointDInteret = await PointDInteret.findOneAndUpdate({ ID: id }, updates, { new: true }); // Update the document
+    const pointDInteret = await PointDInteret.findOneAndUpdate({ ID: id }, updates, { new: true }); 
     if (!pointDInteret) {
       return res.status(404).json({ message: "Point of interest not found" });
     }
@@ -81,7 +81,7 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const pointDInteret = await PointDInteret.findOneAndDelete({ ID: id }); // Delete the document
+    const pointDInteret = await PointDInteret.findOneAndDelete({ ID: id });
     if (!pointDInteret) {
       return res.status(404).json({ message: "Point of interest not found" });
     }

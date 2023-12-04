@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Piste = require('../models/Piste'); // Assuming the model is in the 'models' directory
+const Piste = require('../models/Piste'); 
 
 
 router.get('/', async (req, res) => {
